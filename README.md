@@ -2,5 +2,5 @@
 
 
 
-##A Clone of the popular journaling app reflectly.
+## A Clone of the popular journaling app reflectly.
 
