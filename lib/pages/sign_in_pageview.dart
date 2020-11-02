@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_reflectly/components/animatedWidget/animated_logo.dart';
 import 'package:my_reflectly/pages/sign_in.dart';
 import 'package:my_reflectly/pages/sign_in_1_name.dart';
 import 'package:my_reflectly/pages/sign_in_2_theme.dart';
@@ -21,10 +20,6 @@ class _SignInPageViewState extends State<SignInPageView>
 
   double overBoardIndicatorPosition;
 
-
-
-
-
   //logo animations
   Animation<double> scaleAnimation;
   Animation<double> slideLogoUpAnimation;
@@ -32,39 +27,29 @@ class _SignInPageViewState extends State<SignInPageView>
   //onboarding indicator animation
   Animation<Offset> slideUpAnimation;
 
-
   @override
   void initState() {
     super.initState();
 
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds:500),
+      duration: Duration(milliseconds: 500),
     );
 
-    scaleAnimation = Tween<double>(begin: 1, end: .6).animate(
-        CurvedAnimation(parent: animationController, curve:Interval(
-            0,
-            .65, curve:Curves.easeIn
+    scaleAnimation = Tween<double>(begin: 1, end: .6).animate(CurvedAnimation(
+        parent: animationController,
+        curve: Interval(0, .65, curve: Curves.easeIn)));
 
-        )));
-
-    slideUpAnimation = Tween<Offset>(
-      begin: Offset(0,1),
-      end: Offset.zero
-    ).animate(CurvedAnimation(
-      parent: animationController,
-      curve: Curves.easeOutCirc
-    ));
+    slideUpAnimation = Tween<Offset>(begin: Offset(0, 1), end: Offset.zero)
+        .animate(CurvedAnimation(
+            parent: animationController, curve: Curves.easeOutCirc));
 
     slideLogoUpAnimation = Tween<double>(begin: 1, end: 0).animate(
-        CurvedAnimation(parent: animationController, curve:Interval(
-          .35,
-          1, curve:Curves.easeIn
-
-        ),),);
-
-
+      CurvedAnimation(
+        parent: animationController,
+        curve: Interval(.35, 1, curve: Curves.easeIn),
+      ),
+    );
   }
 
   void runAnimation() {
@@ -86,11 +71,10 @@ class _SignInPageViewState extends State<SignInPageView>
     double screenWidth = MediaQuery.of(context).size.width;
     double screenheight = MediaQuery.of(context).size.height;
 
-
-    double onBoardingNameItem =screenWidth*30/100;
-    double onBoardingThemeItem=screenWidth*37/100;
-    double onBoardingReminderItem=screenWidth*44/100;
- double onBoardingItem ;
+    double onBoardingNameItem = screenWidth * 30 / 100;
+    double onBoardingThemeItem = screenWidth * 37 / 100;
+    double onBoardingReminderItem = screenWidth * 44 / 100;
+    double onBoardingItem;
 
     PageController controller;
     int pageIndex = 0;
@@ -120,8 +104,6 @@ class _SignInPageViewState extends State<SignInPageView>
             switch (index) {
               case 0:
                 setState(() {
-
-
                   print(onBoardingItem);
                   animationController.reverse();
                   isIndicatorVisible = false;
@@ -130,10 +112,9 @@ class _SignInPageViewState extends State<SignInPageView>
               case 1:
                 setState(() {
                   animationController.forward();
-onBoardingItem = onBoardingNameItem;
+                  onBoardingItem = onBoardingNameItem;
                   isIndicatorVisible = true;
                   print(onBoardingItem);
-
                 });
                 break;
               case 2:
@@ -141,7 +122,6 @@ onBoardingItem = onBoardingNameItem;
                   isIndicatorVisible = true;
                   onBoardingItem = onBoardingThemeItem;
                   print(onBoardingItem);
-
                 });
                 break;
               case 3:
@@ -185,8 +165,6 @@ onBoardingItem = onBoardingNameItem;
                     child: LogoAnimation())),
           ],
         ),
-
-
         Positioned(
           bottom: 20,
           left: 40,
@@ -202,11 +180,15 @@ onBoardingItem = onBoardingNameItem;
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    OnBoardingIndicator(position:onBoardingNameItem,color: Colors.grey),
-                    OnBoardingIndicator(position:onBoardingThemeItem, color: Colors.grey),
-                    OnBoardingIndicator(position:onBoardingReminderItem, color: Colors.grey),
-
-                   OnBoardingIndicator(position: context.watch<OnBoardingValue>().value, color: Colors.white)
+                    OnBoardingIndicator(
+                        position: onBoardingNameItem, color: Colors.grey),
+                    OnBoardingIndicator(
+                        position: onBoardingThemeItem, color: Colors.grey),
+                    OnBoardingIndicator(
+                        position: onBoardingReminderItem, color: Colors.grey),
+                    OnBoardingIndicator(
+                        position: context.watch<OnBoardingValue>().value,
+                        color: Colors.white)
                   ],
                 ),
               ),
@@ -265,7 +247,7 @@ class _LogoAnimationState extends State<LogoAnimation>
             margin: EdgeInsets.only(left: screenWidth / 2.7),
             alignment: Alignment.topCenter,
             child: FlutterLogo(
-              colors: Colors.green,
+              textColor: Colors.green,
               size: 90,
             ),
           ),

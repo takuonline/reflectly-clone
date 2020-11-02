@@ -39,12 +39,9 @@ class _AddNotePageViewState extends State<AddNotePageView> {
 
   bool hasChanged = false;
 
-
   void showValue() {
     print(sliderValue);
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +50,6 @@ class _AddNotePageViewState extends State<AddNotePageView> {
     );
 
     activities = context.watch<ActivitiesMoments>().activitiesList;
-
-
 
     final pageView = Stack(
       children: [
@@ -76,8 +71,12 @@ class _AddNotePageViewState extends State<AddNotePageView> {
                 onPressed: () {
                   context.read<ActivitiesMoments>().clearActivityMoment();
                   context.read<SliderValue>().setSliderValue(2.5);
-                  context.read<ActivitiesIsMoreThanZero>().toggleActivitiesIsMoreThanZero(false);
-                  context.read<FeelingsIsMoreThanZero>().toggleFeelingsIsMoreThanZero(false);
+                  context
+                      .read<ActivitiesIsMoreThanZero>()
+                      .toggleActivitiesIsMoreThanZero(false);
+                  context
+                      .read<FeelingsIsMoreThanZero>()
+                      .toggleFeelingsIsMoreThanZero(false);
                   print('item x pressed');
                 },
                 icon: Icon(
@@ -89,25 +88,27 @@ class _AddNotePageViewState extends State<AddNotePageView> {
           ),
         ),
         PageView(
-
           physics: NeverScrollableScrollPhysics(),
           controller: controller,
           children: <Widget>[
-            Moment1(controller,hasChanged),
+            Moment1(controller, hasChanged),
             MultiProvider(
               providers: [
                 ChangeNotifierProvider.value(value: GridActivityList()),
-                ChangeNotifierProvider.value(value: isActivitiesButtonDisabled())
+                ChangeNotifierProvider.value(
+                    value: isActivitiesButtonDisabled())
               ],
-              child: Moment2(controller,),
+              child: Moment2(
+                controller,
+              ),
             ),
             Moment3(controller, feelings),
             Moment4(
-                controller,
-                activities,
-                feelings,
-                momentTitle,
-                momentText,
+              controller,
+              activities,
+              feelings,
+              momentTitle,
+              momentText,
             ),
           ],
         ),
@@ -116,8 +117,8 @@ class _AddNotePageViewState extends State<AddNotePageView> {
           child: Align(
             alignment: Alignment.topCenter,
             child: FlutterLogo(
-              size:40,
-              colors: Colors.red,
+              size: 40,
+              textColor: Colors.red,
             ),
           ),
         )
@@ -128,13 +129,16 @@ class _AddNotePageViewState extends State<AddNotePageView> {
       key: ValueKey('dismissible'),
       direction: DismissDirection.down,
       onDismissed: (direction) {
-
-      Navigator.pop(context);
+        Navigator.pop(context);
 
         context.read<ActivitiesMoments>().clearActivityMoment();
         context.read<SliderValue>().setSliderValue(2.5);
-        context.read<ActivitiesIsMoreThanZero>().toggleActivitiesIsMoreThanZero(false);
-      context.read<FeelingsIsMoreThanZero>().toggleFeelingsIsMoreThanZero(false);
+        context
+            .read<ActivitiesIsMoreThanZero>()
+            .toggleActivitiesIsMoreThanZero(false);
+        context
+            .read<FeelingsIsMoreThanZero>()
+            .toggleFeelingsIsMoreThanZero(false);
       },
       dismissThresholds: {
         DismissDirection.down: .2,
@@ -149,10 +153,9 @@ class _AddNotePageViewState extends State<AddNotePageView> {
 
           return Material(
               color: Color(0xff0093E9),
-
-           shape: RoundedRectangleBorder(
-               borderRadius: BorderRadius.vertical(top: Radius.circular(30))
-           ),
+              shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(30))),
               child: pageView);
         },
       ),

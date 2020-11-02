@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_reflectly/components/daily_positives/custom_chip.dart';
-import 'file:///C:/Users/Taku/AndroidStudioProjects/my_reflectly/lib/components/daily_positives/daily_positives_clipper.dart';
+import 'package:my_reflectly/components/daily_positives/daily_positives_clipper.dart';
 import 'package:my_reflectly/providers/daily_positives_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -48,8 +48,6 @@ class _DailyPositivesDraggableState extends State<DailyPositivesDraggable> {
             double screenWidth = MediaQuery.of(context).size.width;
             double screenheight = MediaQuery.of(context).size.height;
 
-
-
             return ClipRRect(
               borderRadius: BorderRadius.circular(30),
               child: Container(
@@ -67,10 +65,7 @@ class _DailyPositivesDraggableState extends State<DailyPositivesDraggable> {
                       Stack(
                         children: [
                           ClipPath(
-                            clipper: DailyPositivesClipper(
-
-                            ),
-
+                            clipper: DailyPositivesClipper(),
                             child: Container(
                               height: screenheight * .8,
                               width: screenWidth,
@@ -81,10 +76,8 @@ class _DailyPositivesDraggableState extends State<DailyPositivesDraggable> {
                               child: Image.asset(
                                 '$imageName',
                                 fit: BoxFit.fitHeight,
-
                               ),
                             ),
-
                           ),
                           Transform.translate(
                             offset: Offset(
@@ -134,7 +127,7 @@ class _DailyPositivesDraggableState extends State<DailyPositivesDraggable> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 30.0),
                                 child: Text(
-                                title,
+                                  title,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 25,
@@ -152,10 +145,11 @@ class _DailyPositivesDraggableState extends State<DailyPositivesDraggable> {
                                   child: SizedBox(
                                     height: 50,
                                     child: Wrap(
-                                      spacing: 5,
-                                      runSpacing: 5,
-                                      children: tagList.map((e) => CustomChip(text:e)).toList()
-                                    ),
+                                        spacing: 5,
+                                        runSpacing: 5,
+                                        children: tagList
+                                            .map((e) => CustomChip(text: e))
+                                            .toList()),
                                   ),
                                 ),
                               ),
@@ -169,8 +163,7 @@ class _DailyPositivesDraggableState extends State<DailyPositivesDraggable> {
                       Transform.translate(
                         offset: Offset(0, -135),
                         child: Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 25),
+                          padding: const EdgeInsets.symmetric(horizontal: 25),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
