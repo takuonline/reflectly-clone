@@ -2,13 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:my_reflectly/components/daily_positives/custom_chip.dart';
 import 'package:my_reflectly/components/daily_positives/daily_positives_card.dart';
 import 'package:my_reflectly/components/daily_positives/draggable.dart';
 import 'package:my_reflectly/components/navbar/nav_btn.dart';
-import 'file:///C:/Users/Taku/AndroidStudioProjects/my_reflectly/lib/components/daily_positives/daily_positives_clipper.dart';
 import 'package:my_reflectly/components/navbar/navbar.dart';
-import 'package:my_reflectly/components/networking/image_network.dart';
 import 'package:my_reflectly/providers/daily_positives_provider.dart';
 import 'package:my_reflectly/providers/images_provider.dart';
 import 'package:my_reflectly/providers/show_add_note_provider.dart';
@@ -22,8 +19,8 @@ class DailyPositives extends StatefulWidget {
   _DailyPositivesState createState() => _DailyPositivesState();
 }
 
-class _DailyPositivesState extends State<DailyPositives> with SingleTickerProviderStateMixin{
-
+class _DailyPositivesState extends State<DailyPositives>
+    with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   Animation _fadeAnimation;
   Animation<Offset> _slideAnimation;
@@ -34,35 +31,21 @@ class _DailyPositivesState extends State<DailyPositives> with SingleTickerProvid
   DailyPositivesObject dailyPositivesObject;
   final StoryController storyController = StoryController();
 
-
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 1)
-    );
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
 
     _animationController.forward();
 
-    _fadeAnimation = CurvedAnimation(
-      parent: _animationController,
-     curve: Curves.ease
-    );
+    _fadeAnimation =
+        CurvedAnimation(parent: _animationController, curve: Curves.ease);
 
-    _slideAnimation = Tween<Offset>(
-      begin:Offset(0,.4),
-      end: Offset.zero
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve:   Curves.ease
-    ));
-
-
-
+    _slideAnimation = Tween<Offset>(begin: Offset(0, .4), end: Offset.zero)
+        .animate(
+            CurvedAnimation(parent: _animationController, curve: Curves.ease));
   }
-
-
 
   Future<void> _showInstaDialog(BuildContext context, String imageUrl) async {
     return showDialog<void>(
@@ -73,7 +56,6 @@ class _DailyPositivesState extends State<DailyPositives> with SingleTickerProvid
           controller: storyController,
           storyItems: [
             StoryItem.pageImage(url: imageUrl, controller: storyController),
-
           ],
           onComplete: () {
             Navigator.of(context).pop();
@@ -119,8 +101,11 @@ class _DailyPositivesState extends State<DailyPositives> with SingleTickerProvid
                       Container(
                         margin: EdgeInsets.only(top: 55, left: 10),
                         child: GestureDetector(
-                          onTap: (){
-                            print(Provider.of<DPImagesProvider>(context,listen: false).items.length);
+                          onTap: () {
+                            print(Provider.of<DPImagesProvider>(context,
+                                    listen: false)
+                                .items
+                                .length);
                           },
                           child: Text(
                             ' Daily Positives',
@@ -181,7 +166,6 @@ class _DailyPositivesState extends State<DailyPositives> with SingleTickerProvid
                   )
                 ],
               ),
-
               if (context.watch<IsPopUpOn>().isPopUpOn)
                 GestureDetector(
                   onTap: () => context.read<IsPopUpOn>().togglePopUp(),
@@ -192,8 +176,7 @@ class _DailyPositivesState extends State<DailyPositives> with SingleTickerProvid
                     height: screenheight,
                   ),
                 ),
-
-              Navbar(  isVisible: _isVisible),
+              Navbar(isVisible: _isVisible),
               Navbtn(
                 screenheight: screenheight,
               ),

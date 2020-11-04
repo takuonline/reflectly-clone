@@ -67,7 +67,7 @@ class TextNote extends StatelessWidget {
               ),
               child: Icon(
                 icon,
-                size:90,
+                size: 90,
                 color: Color(0xffeeeeee),
               ),
             ),
